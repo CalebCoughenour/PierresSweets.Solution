@@ -1,0 +1,19 @@
+@model IEnumerable<PierresSweets.Models.Treat>
+
+<h1>All Recipes</h1>
+
+@if(Model.Any())
+{
+<ul>
+  @foreach(Treat treat in Model)
+  {
+    <li>@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId})</li>
+  }
+</ul>
+}
+else
+{
+  <p>No treats added yet</p>
+}
+
+  <p>@Html.ActionLink("Add Treat", "Create")</p>
