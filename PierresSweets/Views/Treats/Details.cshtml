@@ -12,29 +12,21 @@
 }
 else
 {
-  <h4>Categories this item belongs to:</h4>
+  <h4>Flavors:</h4>
   <ul>
-    @foreach (var join in Model.TreatFlavor)
-    {
-      <li>@join.Flavor.Name</li>
-    }
-  </ul>
-}
-
-<ul>
   @foreach (var join in Model.TreatFlavor)
   {
     <li>@join.Flavor.Name</li>
-    @using (@Html.BeginForm("DeleteFlavor", "Treats"))
+    @using (@Html.BeginForm("DeleteTreat", "Flavors"))
     {
       @Html.Hidden("joinId", @join.TreatFlavorId)
       <input type="submit" value="Delete"/>
     }
   }
 </ul>
+}
 
 <p>@Html.ActionLink("Back To Treats", "Index")</p>
 <p>@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId })</p>
 <p>@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId })</p>
-<p>@Html.ActionLink("Add Flavor", "AddFlavor", new { id = Model.TreatId })</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
