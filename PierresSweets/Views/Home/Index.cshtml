@@ -1,5 +1,64 @@
-﻿@{
+﻿@* @{
     ViewData["Title"] = "Home";
-}
+} *@
+
+@ViewBag.PageTitle = "Home";
+@using PierresSweets.Models
+@model List<PierresSweets.Models.Flavor>
 
 
+@* <div class="topnav">
+  <a id="nav-name-link" href="/"><h1 class="nav-title">Sillystringz Inc.</h1></a>
+  <a id="nav-link" href="/" class="active">Home</a>
+  <a id="nav-link" href="/engineer">Engineers</a>
+  <a id="nav-link" href="/machine">Machines</a>
+  <a id="nav-link" href="/machine/create">Add Machine</a>
+  <a id="nav-link" href="/engineer/create">Add Engineer</a>
+</div> *@
+
+<div class="container">
+  <h1>Pierre's Sweetshop</h1>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <h5>Available Treats</h5>
+        @if (ViewBag.Treats.Count == 0)
+        {
+          <p id="centered">No treats have been added yet</p>
+        }
+        else
+        {
+          {
+            <ul>
+              @foreach (Treat treat in ViewBag.Treats)
+              {
+                <li>@Html.ActionLink($"{treat.Name}", "Details", "Treat", new { id = treat.TreatId })</li>
+              }
+            </ul>
+          }
+        }
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card">
+        <h5>Flavor List:</h5>
+        @if (ViewBag.Flavors.Count == 0)
+        {
+          <p>No flavors have been added yet</p>
+        }
+        else
+        {
+          {
+            <ul>
+              @foreach (Flavor flavor in ViewBag.Flavors)
+              {
+                  <li>@Html.ActionLink($"{flavor.Name}", "Details", "Flavor", new { id = flavor.FlavorId })</li>
+              }
+            </ul>
+          }
+        }
+      </div>
+    </div>
+  </div>
+</div>
