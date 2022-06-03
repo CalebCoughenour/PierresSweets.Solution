@@ -56,7 +56,7 @@ namespace PierresSweets.Controllers
     {
       var thisFlavor = _db.Flavors
         .Include(flavor => flavor.TreatFlavor)
-        .ThenInclude(join => join.Flavor)
+        .ThenInclude(join => join.Treat)
         .FirstOrDefault(flavor => flavor.FlavorId == id);
       return View(thisFlavor);
     }
@@ -99,6 +99,7 @@ namespace PierresSweets.Controllers
       ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
       return View(thisFlavor);
     }
+    
     [HttpPost]
     public ActionResult AddTreat(Flavor flavor, int TreatId)
     {
@@ -110,13 +111,14 @@ namespace PierresSweets.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize]
     [HttpPost]
     public ActionResult DeleteTreat(int joinId)
     {
       var joinEntry = _db.TreatFlavor.FirstOrDefault(entry => entry.TreatFlavorId == joinId);
       _db.TreatFlavor.Remove(joinEntry);
       _db.SaveChanges();
-      return RedirectToAction("Index", "Treats");
+      return RedirectToAction("Index", "Flavors");
     }
 
   }
