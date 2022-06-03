@@ -33,7 +33,7 @@
             <ul>
               @foreach (Treat treat in ViewBag.Treats)
               {
-                <li>@Html.ActionLink($"{treat.Name}", "Details", "Treat", new { id = treat.TreatId })</li>
+                <li>@Html.ActionLink($"{treat.Name}", "Details", "Treats", new { id = treat.TreatId })</li>
               }
             </ul>
           }
@@ -53,7 +53,7 @@
             <ul>
               @foreach (Flavor flavor in ViewBag.Flavors)
               {
-                  <li>@Html.ActionLink($"{flavor.Name}", "Details", "Flavor", new { id = flavor.FlavorId })</li>
+                  <li>@Html.ActionLink($"{flavor.Name}", "Details", "Flavors", new { id = flavor.FlavorId })</li>
               }
             </ul>
           }
@@ -64,16 +64,14 @@
 
   @if (User.Identity.IsAuthenticated)
   {
-  <h3>Welcome @User.Identity.Name.</h3>
-  <p>Ready to discover new recipes?</p>
+  <h3>Welcome @User.Identity.Name</h3>
   @using (Html.BeginForm("LogOff", "Account"))
     {
-      <input type="submit" class="btn btn-default" value="Log Out"/>
+      <input type="submit" class="btn btn-primary" value="Log Out"/>
     }
   }
   else
   {
-    <h3>Log in to view your recipes.</h3>
     <p>@Html.ActionLink("Register/Log-in", "Index", "Account", null, new { @Class = "btn btn-primary"})</p>
   }
   <p>@Html.ActionLink("View Treats", "Index", "Treats", null, new { @Class = "btn btn-primary"})</p>
