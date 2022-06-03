@@ -1,0 +1,20 @@
+@model IEnumerable<PierresSweets.Models.Flavor>
+
+<h1>All Flavors</h1>
+
+@if(Model.Any())
+{
+<ul>
+  @foreach(Flavor flavor in Model)
+  {
+    <li>@Html.ActionLink($"{flavor.Name}", "Details", new { id = flavor.FlavorId})</li>
+  }
+</ul>
+}
+else
+{
+  <p>Nothing added yet</p>
+}
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p>@Html.ActionLink("Add flavor", "Create")</p>
