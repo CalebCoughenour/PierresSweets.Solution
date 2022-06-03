@@ -1,0 +1,16 @@
+@model PierresSweets.Models.Treat
+
+<h4>Add New Treat</h4>
+
+@using (Html.BeginForm())
+{
+
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name, new { required = "required"})
+
+  @Html.LabelFor(model => model.Description)
+  @Html.TextBoxFor(model => model.Description, new { required = "required" })
+
+  <input type="submit" value="Add Treat" class="btn btn-default" />
+}
+<p>@Html.ActionLink("Back to treats", "Index")</p>
