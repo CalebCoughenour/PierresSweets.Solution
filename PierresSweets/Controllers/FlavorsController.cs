@@ -51,5 +51,16 @@ namespace PierresSweets.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult Details(int id)
+    {
+      var thisFlavor = _db.Flavors
+        .Include(flavor => flavor.TreatFlavor)
+        .ThenInclude(join => join.Flavor)
+        .FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
+    }
+
+
   }
 }
