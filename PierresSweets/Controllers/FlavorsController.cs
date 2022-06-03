@@ -52,6 +52,7 @@ namespace PierresSweets.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize]
     public ActionResult Details(int id)
     {
       var thisFlavor = _db.Flavors
@@ -61,6 +62,20 @@ namespace PierresSweets.Controllers
       return View(thisFlavor);
     }
 
+    [Authorize]
+    public ActionResult Edit(int id)
+    {
+      var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
+    }
 
+    [HttpPost]
+    public ActionResult Edit(Flavor flavor)
+    {
+      _db.Entry(flavor).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+    
   }
 }
